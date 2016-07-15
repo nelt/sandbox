@@ -17,17 +17,31 @@ public class WebServiceTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
+    public void getter() throws Exception {
+        assertThat(WebService.builder().url("/a/b").build().url(), is("/a/b"));
+    }
+
+    @Test
+    public void toString_() throws Exception {
+        WebService webService = WebService.builder().url("/a/b/c").build();
+        assertThat(
+                webService.toString(),
+                is("WebService{url=/a/b/c}"));
+    }
+
+    @Test
+    public void equal_() throws Exception {
+        assertThat(
+                WebService.builder().url("/a" + "/b").build(),
+                is(WebService.builder().url("/a/b").build()));
+
+    }
+
+    @Test
     public void whenNoUrl_throwsIllegalStateException() throws Exception {
         thrown.expect(IllegalStateException.class);
         thrown.expectMessage("Missing required properties: url");
         WebService.builder().build();
     }
 
-    @Test
-    public void to_string() throws Exception {
-        WebService webService = WebService.builder().url("/a/b/c").build();
-        assertThat(
-                webService.toString(),
-                is("WebService{url=/a/b/c}"));
-    }
 }
