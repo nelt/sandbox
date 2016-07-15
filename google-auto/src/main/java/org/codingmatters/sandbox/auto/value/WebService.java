@@ -9,7 +9,7 @@ import com.google.auto.value.AutoValue;
 public abstract class WebService {
     public abstract String url();
 
-    static public Builder builder() {
+    static public Builder ws() {
         return new AutoValue_WebService.Builder();
     }
 

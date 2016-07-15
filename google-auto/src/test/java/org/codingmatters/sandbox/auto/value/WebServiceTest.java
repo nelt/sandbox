@@ -4,6 +4,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static org.codingmatters.sandbox.auto.value.WebService.ws;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -17,12 +18,12 @@ public class WebServiceTest {
 
     @Test
     public void getter() throws Exception {
-        assertThat(WebService.builder().url("/a/b").build().url(), is("/a/b"));
+        assertThat(ws().url("/a/b").build().url(), is("/a/b"));
     }
 
     @Test
     public void toString_() throws Exception {
-        WebService webService = WebService.builder().url("/a/b/c").build();
+        WebService webService = ws().url("/a/b/c").build();
         assertThat(
                 webService.toString(),
                 is("WebService{url=/a/b/c}"));
@@ -31,8 +32,8 @@ public class WebServiceTest {
     @Test
     public void equal_() throws Exception {
         assertThat(
-                WebService.builder().url("/a" + "/b").build(),
-                is(WebService.builder().url("/a/b").build()));
+                ws().url("/a" + "/b").build(),
+                is(ws().url("/a/b").build()));
 
     }
 
@@ -40,7 +41,7 @@ public class WebServiceTest {
     public void whenNoUrl_throwsIllegalStateException() throws Exception {
         thrown.expect(IllegalStateException.class);
         thrown.expectMessage("Missing required properties: url");
-        WebService.builder().build();
+        ws().build();
     }
 
 }
